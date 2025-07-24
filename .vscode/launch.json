@@ -2,6 +2,69 @@
   // Configuración para depurar un programa en C
   "version": "0.2.0",
   "configurations": [
+    
+    {"name":"Python Debugger: Current File","type":"debugpy","request":"launch","program":"${file}","console":"integratedTerminal"},
+    {
+      "type": "pydevd",
+      "name": "PyDev Debug (Launch)",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "program": "${file}",
+      "args": ""
+    },
+    {
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "name": "Launch Extension",
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "preLaunchTask": "npm",
+      "request": "launch",
+      "type": "extensionHost"
+    },
+    {
+      "type": "cspy",
+      "request": "launch",
+      "name": "Debug with C-SPY Simulator",
+      "target": "msp430",
+      "program": "${workspaceFolder}/Debug/Exe/ewproj.out",
+      "stopOnSymbol": "main",
+      "workbenchPath": "${command:iar-config.toolchain}",
+      "projectPath": "${command:iar-config.project-file}",
+      "projectConfiguration": "${command:iar-config.project-configuration}",
+      "driver": "Simulator",
+      "driverOptions": [
+        "--hwmul_base",
+        "0x130",
+        "--hardware_multiplier",
+        "16",
+        "--hwmult_type",
+        "1",
+        "-p",
+        "${command:iar-config.toolchain}/430/config/debugger/msp430f149.ddf",
+        "--iv_base",
+        "0xFFE0",
+        "--odd_word_check",
+        "-d",
+        "sim",
+        "--derivativeSim",
+        "MSP430F149"
+      ]
+    },
+    {
+      "type": "cspy",
+      "request": "launch",
+      "name": "Debug the active IAR Project with C-SPY",
+      "workbenchPath": "${command:iar-config.toolchain}",
+      "projectPath": "${command:iar-config.project-file}",
+      "projectConfiguration": "${command:iar-config.project-configuration}",
+      "buildBeforeDebugging": "AskOnFailure"
+    },
+    
+
     {
       "name": "Python Debugger: Current File",
       "type": "debugpy",
